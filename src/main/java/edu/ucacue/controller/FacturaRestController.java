@@ -38,6 +38,16 @@ public class FacturaRestController {
 		return dfr.findAll();
 	}
 	
+	@GetMapping("facturas/ventasDiarias")
+	public List<DetalleFactura> index1() {
+		return dfr.findAll();
+	}
+	
+	@GetMapping("inventario")
+	public List<DetalleFactura> index2() {
+		return dfr.findAll();
+	}
+
 	@GetMapping("/facturas/{id}")
 	public DetalleFactura getById(@PathVariable int id) {
 
