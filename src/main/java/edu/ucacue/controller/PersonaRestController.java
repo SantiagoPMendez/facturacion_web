@@ -41,7 +41,7 @@ public class PersonaRestController {
 	@Autowired
 	private PersonaRepositorio personaRepositorio;
 
-	@GetMapping("/clientes")
+	@GetMapping("/clientes") // obtner datos
 	public List<Persona> index() {
 		return personaRepositorio.findAll();
 	}
@@ -60,7 +60,7 @@ public class PersonaRestController {
 		return personas;
 	}
 
-	@PostMapping("/cliente")
+	@PostMapping("/cliente") // grabar/subir datos
 	public ResponseEntity<?> saveCliente(@RequestBody Persona persona, BindingResult result) {
 		Persona personaGrabar;
 		Map<String, Object> response = new HashMap<>();
@@ -141,9 +141,8 @@ public class PersonaRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/cliente/{id}")
-	public ResponseEntity<?> eliminarCliente(
-			@PathVariable int id) {
+	@DeleteMapping("/cliente/{id}") //borrar datos
+	public ResponseEntity<?> eliminarCliente(@PathVariable int id) {
 		
 		
 		Map<String, Object> response = new HashMap<>();
