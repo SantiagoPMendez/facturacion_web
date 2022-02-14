@@ -120,7 +120,7 @@ public class PersonaRestController {
 			cliente.setApellido(persona.getApellido());
 			cliente.setNombre(persona.getNombre());
 			cliente.setTelefono(persona.getTelefono());
-			cliente.setNumeroHijos(persona.getNumeroHijos());
+			cliente.setDireccion(persona.getDireccion());
 			
 			clienteModificado= personaRepositorio.save(cliente); 
 			

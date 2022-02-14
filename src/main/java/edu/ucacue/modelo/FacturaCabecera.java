@@ -29,9 +29,8 @@ public class FacturaCabecera implements Serializable {
 	
 	@Column(unique = true)
 	private int numeroFactura;
-	
+		
 	private Date fechaEmision;
-	private Double totalFactura;
 	
 	@ManyToOne
 	@JoinColumn(name = "persona_fk")
@@ -39,6 +38,8 @@ public class FacturaCabecera implements Serializable {
 	
 	@OneToMany(mappedBy = "idFactura", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<DetalleFactura> detallesFacturas;
+	
+	private Double totalFactura;
 	
 	public FacturaCabecera() {
 		
@@ -81,7 +82,7 @@ public class FacturaCabecera implements Serializable {
 		this.detallesFacturas = detallesFacturas;
 		double total=0;
 		for (DetalleFactura detalleFactura : detallesFacturas) {
-			total=total+detalleFactura.getValorVenta();
+			total=total+detalleFactura.getSubTotal();
 		}
 		this.totalFactura=total;
 	}

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.ucacue.infraestructura.repository.DetalleFacturaRepositorio;
-import edu.ucacue.infraestructura.repository.FacturaCabeceraRepositorio;
 import edu.ucacue.modelo.DetalleFactura;
 
 @RestController
@@ -29,8 +28,8 @@ public class FacturaRestController {
 	@Autowired
 	private DetalleFacturaRepositorio dfr;
 	
-	@Autowired
-	private FacturaCabeceraRepositorio fcr;
+	/*@Autowired
+	private FacturaCabeceraRepositorio fcr;*/
 	
 
 	@GetMapping("/facturas")
@@ -47,6 +46,7 @@ public class FacturaRestController {
 	public List<DetalleFactura> index2() {
 		return dfr.findAll();
 	}
+	
 
 	@GetMapping("/facturas/{id}")
 	public DetalleFactura getById(@PathVariable int id) {
@@ -80,7 +80,5 @@ public class FacturaRestController {
 		response.put("Factura", facturaGrabar);
 
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
-	}
-	
-	
+	}	
 }

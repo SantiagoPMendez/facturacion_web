@@ -20,57 +20,69 @@ import javax.persistence.Table;
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private int idFactura;
 		
-		private int cantidad;
-		private double valorVenta;
+		@ManyToOne
+		@JoinColumn(name = "factura_cabecera_fk")
+		private FacturaCabecera facturaCabecera;
 		
 		@ManyToOne
 		@JoinColumn(name = "producto_fk")
 		private Producto producto;
 		
-		@ManyToOne
-		@JoinColumn(name = "factura_cabecera_fk")
-		private FacturaCabecera facturaCabecera;
+		private int cantidad;
 		
-		public DetalleFactura(int cantidad, Producto producto, FacturaCabecera facturaCabecera) {
-			super();
-			this.cantidad = cantidad;
-			this.producto = producto;
-			this.facturaCabecera = facturaCabecera;
-			this.valorVenta= this.cantidad * producto.getPrecio();
-		}
+		private double subTotal;
 		
 		public DetalleFactura() {
 			
 		}
-		
+
+		public DetalleFactura(int idFactura, FacturaCabecera facturaCabecera, Producto producto, int cantidad,
+				double subTotal) {
+			super();
+			this.idFactura = idFactura;
+			this.facturaCabecera = facturaCabecera;
+			this.producto = producto;
+			this.cantidad = cantidad;
+			this.subTotal = subTotal;
+		}
+
 		public int getIdFactura() {
 			return idFactura;
 		}
+
 		public void setIdFactura(int idFactura) {
 			this.idFactura = idFactura;
 		}
-		public int getCantidad() {
-			return cantidad;
-		}
-		public void setCantidad(int cantidad) {
-			this.cantidad = cantidad;
-		}
-		public double getValorVenta() {
-			return valorVenta;
-		}
-		public void setValorVenta(double valorVenta) {
-			this.valorVenta = valorVenta;
-		}
-		public Producto getProducto() {
-			return producto;
-		}
-		public void setProducto(Producto producto) {
-			this.producto = producto;
-		}
+
 		public FacturaCabecera getFacturaCabecera() {
 			return facturaCabecera;
 		}
+
 		public void setFacturaCabecera(FacturaCabecera facturaCabecera) {
 			this.facturaCabecera = facturaCabecera;
+		}
+
+		public Producto getProducto() {
+			return producto;
+		}
+
+		public void setProducto(Producto producto) {
+			this.producto = producto;
+		}
+
+		public int getCantidad() {
+			return cantidad;
+		}
+
+		public void setCantidad(int cantidad) {
+			this.cantidad = cantidad;
+		}
+
+		public double getSubTotal() {
+			return subTotal;
+		}
+
+		public void setSubTotal(double subTotal) {
+			this.subTotal = subTotal;
 		}
 	}

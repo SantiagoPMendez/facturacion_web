@@ -12,32 +12,33 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "persona")
 public class Persona implements Serializable {
-
+	
 	private static final long serialVersionUID = 1607830177598686701L;
-
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@Column(unique = true)
+	private String cedula;
+	
 	@Column(nullable = false)
 	private String nombre;
 	private String apellido;
 	private String telefono;
-	private Integer numeroHijos;
-	
-	@Column(unique = true)
-	private String cedula;
+	private String direccion;
 	
 	public Persona()
 	{}
 	
-	public Persona(int id, String nombre, String apellido, String telefono) {
+	public Persona(int id, String cedula, String nombre, String apellido, String telefono, String direccion) {
 		super();
 		this.id = id;
+		this.cedula = cedula;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.telefono = telefono;
+		this.direccion = direccion;
 	}
 
 	public int getId() {
@@ -46,6 +47,14 @@ public class Persona implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getCedula() {
+		return cedula;
+	}
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
 	}
 
 	public String getNombre() {
@@ -72,19 +81,11 @@ public class Persona implements Serializable {
 		this.telefono = telefono;
 	}
 
-	public Integer getNumeroHijos() {
-		return numeroHijos;
+	public String getDireccion() {
+		return direccion;
 	}
 
-	public void setNumeroHijos(Integer numeroHijos) {
-		this.numeroHijos = numeroHijos;
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
-
-	public String getCedula() {
-		return cedula;
-	}
-
-	public void setCedula(String cedula) {
-		this.cedula = cedula;
-	}	
 }
