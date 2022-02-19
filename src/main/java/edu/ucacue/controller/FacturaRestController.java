@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.ucacue.infraestructura.repository.DetalleFacturaRepositorio;
+import edu.ucacue.infraestructura.repository.FacturaCabeceraRepositorio;
 import edu.ucacue.modelo.DetalleFactura;
+import edu.ucacue.modelo.FacturaCabecera;
 
+@CrossOrigin(origins = { "http://localhost:4200"})
 @RestController
 @RequestMapping("/api")
 public class FacturaRestController {
@@ -28,25 +32,30 @@ public class FacturaRestController {
 	@Autowired
 	private DetalleFacturaRepositorio dfr;
 	
-	/*@Autowired
-	private FacturaCabeceraRepositorio fcr;*/
-	
+	@Autowired
+	private FacturaCabeceraRepositorio fcr;
+		
 
-	@GetMapping("/facturas")
-	public List<DetalleFactura> index() {
-		return dfr.findAll();
+	@GetMapping("/detallefacturas/{idCabeceraFactura}")
+	public List<DetalleFactura> index(@PathVariable int idCabeceraFactura) {
+		return dfr.findAllByIDCabeceraFactura(idCabeceraFactura);
 	}
 	
-	@GetMapping("facturas/ventasDiarias")
-	public List<DetalleFactura> index1() {
-		return dfr.findAll();
+	@GetMapping("/factura")
+	public List<FacturaCabecera> index1() {
+		return fcr.findAll();
 	}
 	
-	@GetMapping("inventario")
-	public List<DetalleFactura> index2() {
-		return dfr.findAll();
-	}
-	
+//	@GetMapping("facturas/ventasDiarias")
+//	public List<DetalleFactura> index1() {
+//		return dfr.findAll();
+//	}
+//	
+//	@GetMapping("inventario")
+//	public List<DetalleFactura> index2() {
+//		return dfr.findAll();
+//	}
+//	
 
 	@GetMapping("/facturas/{id}")
 	public DetalleFactura getById(@PathVariable int id) {

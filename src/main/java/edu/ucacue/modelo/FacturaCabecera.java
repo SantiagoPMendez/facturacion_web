@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="facturas_cabeceras")
 public class FacturaCabecera implements Serializable {
@@ -36,6 +38,7 @@ public class FacturaCabecera implements Serializable {
 	@JoinColumn(name = "persona_fk")
 	private Persona persona;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "idFactura", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<DetalleFactura> detallesFacturas;
 	
